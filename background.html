@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>gradient-background</title>
+
+        <style>
+            body {
+                width: 100vw;
+                height: 100vh;
+                display: grid;
+                overflow-y: hidden;
+                overflow-x: hidden;
+                place-items: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background: center center fixed;
+            }
+
+            div.container {
+                display: grid;
+                width: auto;
+                height: 200px;
+                grid-template-columns: repeat(2, 1fr);
+                border-radius: 20px;
+            }
+
+            div > button {
+                margin: 2px;
+                border: 2px solid white;
+                border-radius: 20px;
+                background: none;
+                outline: none;
+                color: white;
+                width: 200px;
+                height: 60px;
+            }
+
+            div > button:hover {
+                border: 2px solid black;
+                color: black;
+            }
+
+            #change {
+                grid-area: 1/1/3/2;
+                height: auto;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <button id="change">change</button>
+            <button id="right">right</button>
+            <button id="left">left</button>
+            <button id="up">up</button>
+            <button id="down">down</button>
+        </div>
+
+        <script>
+            console.log('jkmroi')
+            const change = document.getElementById("change");
+            const right = document.getElementById("right");
+            const left = document.getElementById("left");
+            const down = document.getElementById("down");
+            const up = document.getElementById("up");
+            const body = document.querySelector('body');
+
+            console.log('hfjjdv')
+            function generateColor () {
+                let color = '#';
+                const str = '0123456789abcdef';
+
+                console.log('hekjvm')
+                for (let i = 0; i < 6; i++) {
+                    let random = Math.floor(Math.random() * str.length);
+                    color += str[random];
+                }
+
+                console.log(color)
+                return color;
+            }
+
+            generateColor()
+            let x = generateColor();
+            let y = generateColor();
+
+            let angle = 0;
+
+            function changeAngleA () {
+                angle = 0;
+                body.style.backgroundImage = `linear-gradient(${ angle }deg, ${ x }, ${ y })`;
+            }
+
+            function changeAngleB () {
+                angle = -90;
+                body.style.backgroundImage = `linear-gradient(${ angle }deg, ${ x }, ${ y })`;
+            }
+
+            function changeAngleC () {
+                angle = 90;
+                body.style.backgroundImage = `linear-gradient(${ angle }deg, ${ x }, ${ y })`;
+            }
+
+            function changeAngleD () {
+                angle = 180;
+                body.style.backgroundImage = `linear-gradient(${ angle }deg, ${ x }, ${ y })`;
+            }
+
+            right.addEventListener('click', changeAngleC);
+            down.addEventListener('click', changeAngleD);
+            left.addEventListener('click', changeAngleB);
+            up.addEventListener('click', changeAngleA);
+            change.addEventListener('click', () => {
+                x = generateColor();
+                y = generateColor();
+                body.style.backgroundImage = `linear-gradient(${ angle }deg, ${ x }, ${ y })`
+            })
+
+            body.style.backgroundImage = `linear-gradient(${ angle }deg, ${ x }, ${ y })`
+        </script>
+    </body>
+</html>
